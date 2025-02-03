@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Managment Stratagies</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: #ffffff;
+            text-align: center;
+        }
+
+        header {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 1.5rem;
+            font-size: 2rem;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        main {
+            margin: 2rem auto;
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+        }
+
+        input[type="number"] {
+            width: calc(100% - 20px);
+            padding: 15px;
+            margin: 1rem 0;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: transform 0.2s, background 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            background: linear-gradient(to right, #ff4b2b, #ff416c);
+        }
+
+        .results {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .results div {
+            margin: 0.8rem 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            main {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+
+            button {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+
+            input[type="number"] {
+                font-size: 1rem;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>PBL Project - Group 4</header>
+    <main>
+        <p style="font-size: 1.2rem;">Enter your capital amount below, and we'll calculate how to allocate it:</p>
+        <input type="number" id="capital" placeholder="Enter capital amount">
+        <button onclick="calculateBudget()">Calculate</button>
+
+        <div class="results" id="results" style="display: none;">
+            <h3>Budget Allocation:</h3>
+            <div id="food"></div>
+            <div id="savings"></div>
+            <div id="charity"></div>
+            <div id="anything"></div>
+        </div>
+    </main>
+
+    <script>
+        function calculateBudget() {
+            const capital = parseFloat(document.getElementById('capital').value);
+            if (isNaN(capital) || capital <= 0) {
+                alert('Please enter a valid positive number.');
+                return;
+            }
+
+            const proportions = {
+                food: 0.3,
+                savings: 0.4,
+                charity: 0.2,
+                anything: 0.1
+            };
+
+            const results = {
+                food: (capital * proportions.food).toFixed(2),
+                savings: (capital * proportions.savings).toFixed(2),
+                charity: (capital * proportions.charity).toFixed(2),
+                anything: (capital * proportions.anything).toFixed(2)
+            };
+
+            document.getElementById('food').textContent = `Food: $${results.food}`;
+            document.getElementById('savings').textContent = `Savings: $${results.savings}`;
+            document.getElementById('charity').textContent = `Charity: $${results.charity}`;
+            document.getElementById('anything').textContent = `Anything you like: $${results.anything}`;
+
+            document.getElementById('results').style.display = 'block';
+        }
+    </script>
+</body>
+
+</html>
